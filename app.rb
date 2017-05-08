@@ -12,12 +12,12 @@ class SimpleApp
     p "====="
     p request_uri
     p request_path
-    p request_path.start_with?
+    p request_path.start_with?(ADMIN_PATH)
     p "====="
     if request_path.start_with?(ADMIN_PATH)
-      [ 301, {'Location' => "http://localhost:#{ADMIN_SERVER_PORT}#{request_uri}" }, self ]
+      [ 301, {'Location' => "http://localhost:#{ADMIN_SERVER_PORT}#{request_path}" }, self ]
     else
-      [ 301, {'Location' => "http://localhost:#{WEB_SERVER_PORT}#{request_uri}" }, self ]
+      [ 301, {'Location' => "http://localhost:#{WEB_SERVER_PORT}#{request_path}" }, self ]
     end
   end
   def each(&block)
