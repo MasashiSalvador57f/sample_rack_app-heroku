@@ -7,8 +7,13 @@ class SimpleApp
     request = Rack::Request.new(env)
 
     request_uri = env['REQUEST_URI']
+    request_path = env['REQUEST_PATH']
+
+    p "====="
     p request_uri
     p env['REQUEST_PATH']
+    p request_path.start_with?
+    p "====="
     if request_uri.start_with?(ADMIN_PATH)
       [ 301, {'Location' => "http://localhost:#{ADMIN_SERVER_PORT}#{request_uri}" }, self ]
     else
